@@ -7,6 +7,7 @@ export const createMapByTile = (context, map, options = []) => {
       context.tilePositions[i].push({
         x: j * setup.tileSize + setup.tileSize / 2,
         y: i * setup.tileSize + setup.tileSize / 2,
+        name: undefined,
       });
       for (let w = 0; w < options.length; w++) {
         if (map[i][j] === options[w].index) {
@@ -18,8 +19,10 @@ export const createMapByTile = (context, map, options = []) => {
             )
             .setDisplaySize(setup.tileSize, setup.tileSize)
             .refreshBody();
+          context.tilePositions[i][j].name = options[w].tileName;
         }
       }
     }
   }
+  console.log(context.tilePositions);
 };

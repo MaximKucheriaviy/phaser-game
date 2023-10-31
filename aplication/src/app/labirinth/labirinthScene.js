@@ -10,9 +10,11 @@ export class LabirinthScene extends Phaser.Scene {
   preload() {
     this.load.image("plate", "./assets/whall.png");
     this.load.image("robot", "./assets/Robot.png");
+    this.load.image("haika", "./assets/haika.png");
   }
   create() {
     this.walls = this.physics.add.staticGroup();
+    this.haiky = this.physics.add.staticGroup();
     this.tilePositions = [];
     createMapByTile(this, labyrinthMap, [
       { index: 1, group: "walls", tileName: "plate" },

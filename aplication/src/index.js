@@ -1,6 +1,8 @@
 import Phaser from "phaser";
 import { LabirinthScene } from "./app/labirinth/labirinthScene";
 
+console.log(window.visualViewport.width);
+
 const config = {
   width: 800,
   height: 600,
