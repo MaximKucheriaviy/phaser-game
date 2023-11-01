@@ -2,6 +2,8 @@ import { labyrinthMap } from "./map";
 import { setup } from "../setup";
 import { createMapByTile } from "../service/tileMapCreation";
 import { setCameraFolowPlayer } from "../service/suportFunction";
+import { createHayky } from "./createHaiky";
+import { controlSetup } from "../controllSetup";
 
 export class LabirinthScene extends Phaser.Scene {
   constructor() {
@@ -25,21 +27,12 @@ export class LabirinthScene extends Phaser.Scene {
     setCameraFolowPlayer(this, this.player, labyrinthMap);
     this.control = this.input.keyboard.createCursorKeys();
     this.physics.add.collider(this.player, this.walls);
+    createHayky(this, 10);
+    this.physics.add.overlap(this.player, this.haiky, (player, haika) => {
+      haika.destroy();
+    });
   }
   update() {
-    if (this.control.up.isDown) {
-      this.player.setVelocityY(setup.moveSpeed * -1);
-    } else if (this.control.down.isDown) {
-      this.player.setVelocityY(setup.moveSpeed);
-    } else {
-      this.player.setVelocityY(0);
-    }
-    if (this.control.left.isDown) {
-      this.player.setVelocityX(setup.moveSpeed * -1);
-    } else if (this.control.right.isDown) {
-      this.player.setVelocityX(setup.moveSpeed);
-    } else {
-      this.player.setVelocityX(0);
-    }
+    controlSetup(this.control, this.player);
   }
 }
