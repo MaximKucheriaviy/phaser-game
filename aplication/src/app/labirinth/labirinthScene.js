@@ -13,6 +13,7 @@ export class LabirinthScene extends Phaser.Scene {
     this.load.image("plate", "./assets/whall.png");
     this.load.image("robot", "./assets/Robot.png");
     this.load.image("haika", "./assets/haika.png");
+    this.load.image("ball", "./assets/particle.png");
   }
   create() {
     this.walls = this.physics.add.staticGroup();
@@ -31,6 +32,16 @@ export class LabirinthScene extends Phaser.Scene {
     this.physics.add.overlap(this.player, this.haiky, (player, haika) => {
       haika.destroy();
     });
+    const emitter = this.add.particles(100, 300, "flares", {
+      frame: "red",
+      angle: { min: -30, max: 30 },
+      speed: 150,
+      scale: 0.001,
+    });
+    var graphics = this.add.graphics();
+    graphics.fillStyle(0x00ff00); // Установка цвета заливки (зеленый)
+    graphics.fillRect(100, 100, 200, 100); // Рисование прямоугольника
+    graphics.destroy();
   }
   update() {
     controlSetup(this.control, this.player);
